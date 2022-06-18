@@ -22,7 +22,7 @@ A simple cryptocurrency price app pulling price data from the [Binance API](http
 """
 )
 
-st.header("**Selected Price**")
+st.header("**Selected Crypto Price**")
 
 # Load market data from Binance API
 df = pd.read_json("https://api.binance.com/api/v3/ticker/24hr")
