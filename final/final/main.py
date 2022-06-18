@@ -18,7 +18,7 @@ with c1:
 
 st.markdown(
     """# **Crypto Overview**
-ryptocurrency price app
+Cryptocurrency price app
 """
 )
 
