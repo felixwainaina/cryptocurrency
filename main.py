@@ -100,7 +100,7 @@ st.dataframe(df, height=2000)
 # side bar
 st.sidebar.selectbox(
     'Which Ticker?',
-     df['second column'])
+     df['crpytoList'])
 
 # side by side widget
 left_column, right_column = st.columns(2)
