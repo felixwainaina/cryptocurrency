@@ -4,7 +4,7 @@ import pandas as pd
 st.set_page_config(page_icon="🗠", page_title="Cryptocurrency Overview", layout="centered", initial_sidebar_state="auto")
 
 st.sidebar.image(
-    "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/z3ahdkytzwi1jxlpazje",
+    "https://drive.google.com/file/d/1pT5EfpDxk2kSsHKPVNmrsn06J91IKIwd/view?usp=sharing",
     width=50,
 )
 
