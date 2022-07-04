@@ -95,3 +95,15 @@ st.download_button(
 )
 
 st.dataframe(df, height=2000)
+
+
+# side bar
+st.sidebar.selectbox(
+    'Which Ticker?',
+     df['second column'])
+
+# side by side widget
+left_column, right_column = st.columns(2)
+pressed = left_column.button('Press me?')
+if pressed:
+    right_column.write("Woohoo!")
