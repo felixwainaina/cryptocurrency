@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-
+import yfinance as yf
 st.set_page_config(page_icon="🗠", page_title="Cryptocurrency Overview", layout="centered", initial_sidebar_state="auto")
 
 st.sidebar.image(
-    "https://drive.google.com/file/d/1pT5EfpDxk2kSsHKPVNmrsn06J91IKIwd/view?usp=sharing",
+    "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/z3ahdkytzwi1jxlpazje",
     width=50,
 )
 
@@ -25,8 +25,8 @@ Cryptocurrency price app
 st.header("**Selected Crypto Price**")
 
 # Load market data from Binance API
-df = pd.read_json("https://api.binance.com/api/v3/ticker/24hr")
-
+data = yf.download(cryptocurrencies, start='2020-01-01',
+                end='2021-12-12')
 # Custom function for rounding values
 def round_value(input_value):
     if input_value.values > 1:
