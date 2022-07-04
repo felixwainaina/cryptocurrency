@@ -39,14 +39,13 @@ def round_value(input_value):
 crpytoList = {
     "Price 1": "BTCBUSD",
     "Price 2": "ETHBUSD",
-    "Price 3": "LTCTUSD",
+    "Price 3": "BNBBUSD",
     "Price 4": "XRPBUSD",
     "Price 5": "ADABUSD",
     "Price 6": "DOGEBUSD",
     "Price 7": "SHIBBUSD",
     "Price 8": "DOTBUSD",
     "Price 9": "MATICBUSD",
-    "Price 10": 'BNBBUSD'
 }
 
 col1, col2, col3 = st.columns(3)
@@ -71,6 +70,14 @@ for i in range(len(crpytoList.keys())):
             st.metric(selected_crypto, col_price, col_percent)
 
 st.header("")
+
+# st.download_button(
+#    label="Download data as CSV",
+#    data=df,
+#    #file_name='large_df.csv',
+#    # mime='text/csv'
+#    )
+
 
 @st.cache
 def convert_df(df):
