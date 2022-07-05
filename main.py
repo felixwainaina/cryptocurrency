@@ -27,6 +27,7 @@ st.header("**Selected Crypto Price**")
 # Load market data from Binance API
 df = pd.read_json("https://api.binance.com/api/v3/ticker/24hr")
 
+
 # Custom function for rounding values
 def round_value(input_value):
     if input_value.values > 1:
@@ -47,6 +48,24 @@ crpytoList = {
     "Price 8": "DOTBUSD",
     "Price 9": "MATICBUSD",
 }
+
+fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
+                                         open=df.price_open,
+                                         high=df.price_high,
+                                         low=df.price_low,
+                                         close=df.price_close, )]
+                    )
+
+    fig.update_layout(colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
+                      template='plotly_dark',
+                      paper_bgcolor='rgba(0, 0, 0, 0)',
+                      plot_bgcolor='rgba(0, 0, 0, 0)',
+                      margin={'b': 15},
+                      hovermode='x',
+                      autosize=True,
+                      title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5},)
+    return fig
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -95,9 +114,3 @@ st.download_button(
 )
 
 st.dataframe(df, height=2000)
-
-
-# side bar
-st.sidebar.selectbox(
-    'Which Ticker?'
-)
