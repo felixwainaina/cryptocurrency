@@ -37,22 +37,6 @@ def round_value(input_value):
         a = float(round(input_value, 8))
     return a
 
-    fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
-                                         open=df.price_open,
-                                         high=df.price_high,
-                                         low=df.price_low,
-                                         close=df.price_close, )]
-                    )
-
-    fig.update_layout(colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
-                      template='plotly_dark',
-                      paper_bgcolor='rgba(0, 0, 0, 0)',
-                      plot_bgcolor='rgba(0, 0, 0, 0)',
-                      margin={'b': 15},
-                      hovermode='x',
-                      autosize=True,
-                      title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5},)
-    return fig
 
 
 crpytoList = {
@@ -99,6 +83,22 @@ st.header("")
 #    )
 
 
+fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
+                                     open=df.price_open,
+                                     high=df.price_high,
+                                     low=df.price_low,
+                                     close=df.price_close, )]
+                )
+fig.update_layout(colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
+                  template='plotly_dark',
+                  paper_bgcolor='rgba(0, 0, 0, 0)',
+                  plot_bgcolor='rgba(0, 0, 0, 0)',
+                  margin={'b': 15},
+                  hovermode='x',
+                  autosize=True,
+                  title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5}, )
+
+
 @st.cache
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
@@ -115,3 +115,4 @@ st.download_button(
 )
 
 st.dataframe(df, height=2000)
+
