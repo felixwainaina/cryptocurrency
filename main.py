@@ -49,10 +49,14 @@ crpytoList = {
     "Price 7": "SHIBBUSD",
     "Price 8": "DOTBUSD",
     "Price 9": "MATICBUSD",
+    "Price 9": "MATICBUSD",
+    "Price 9": "MATICBUSD",
+    "Price 9": "MATICBUSD",
+    "Price 9": "MATICBUSD",
 }
 
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4  = st.columns(4)
 
 for i in range(len(crpytoList.keys())):
     selected_crypto_label = list(crpytoList.keys())[i]
@@ -81,24 +85,6 @@ st.header("")
 #    #file_name='large_df.csv',
 #    # mime='text/csv'
 #    )
-
-
-fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
-                                     open=df.price_open,
-                                     high=df.price_high,
-                                     low=df.price_low,
-                                     close=df.price_close, )]
-                )
-fig.update_layout(colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400', '#FF0056'],
-                  template='plotly_dark',
-                  paper_bgcolor='rgba(0, 0, 0, 0)',
-                  plot_bgcolor='rgba(0, 0, 0, 0)',
-                  margin={'b': 15},
-                  hovermode='x',
-                  autosize=True,
-                  title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5}, )
-# Plot!
-st.plotly_chart(fig, use_container_width=True)
 
 
 @st.cache
