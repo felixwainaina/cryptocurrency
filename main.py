@@ -97,6 +97,8 @@ fig.update_layout(colorway=["#5E0DAC", '#FF4F00', '#375CB1', '#FF7400', '#FFF400
                   hovermode='x',
                   autosize=True,
                   title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5}, )
+# Plot!
+st.plotly_chart(fig, use_container_width=True)
 
 
 @st.cache
