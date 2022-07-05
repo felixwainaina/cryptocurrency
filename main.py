@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pygments.lexers import go
 
 st.set_page_config(page_icon="🗠", page_title="Cryptocurrency Overview", layout="centered", initial_sidebar_state="auto")
 
@@ -36,20 +37,7 @@ def round_value(input_value):
         a = float(round(input_value, 8))
     return a
 
-
-crpytoList = {
-    "Price 1": "BTCBUSD",
-    "Price 2": "ETHBUSD",
-    "Price 3": "BNBBUSD",
-    "Price 4": "XRPBUSD",
-    "Price 5": "ADABUSD",
-    "Price 6": "DOGEBUSD",
-    "Price 7": "SHIBBUSD",
-    "Price 8": "DOTBUSD",
-    "Price 9": "MATICBUSD",
-}
-
-fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
+    fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
                                          open=df.price_open,
                                          high=df.price_high,
                                          low=df.price_low,
@@ -65,6 +53,19 @@ fig = go.Figure(data=[go.Candlestick(x=df.time_period_start,
                       autosize=True,
                       title={'text': 'Cryptocurrency Prices', 'font': {'color': 'white'}, 'x': 0.5},)
     return fig
+
+
+crpytoList = {
+    "Price 1": "BTCBUSD",
+    "Price 2": "ETHBUSD",
+    "Price 3": "BNBBUSD",
+    "Price 4": "XRPBUSD",
+    "Price 5": "ADABUSD",
+    "Price 6": "DOGEBUSD",
+    "Price 7": "SHIBBUSD",
+    "Price 8": "DOTBUSD",
+    "Price 9": "MATICBUSD",
+}
 
 
 col1, col2, col3 = st.columns(3)
