@@ -55,7 +55,8 @@ crpytoList = {
 }
 
 
-col1, col2, col3, col4  = st.columns(3)
+col1, col2, col3, col4  = st.columns(4)
+
 
 for i in range(len(crpytoList.keys())):
     selected_crypto_label = list(crpytoList.keys())[i]
