@@ -1,30 +1,74 @@
+# Import necessary libraries
+import dash
+from dash import dcc, html, Input, Output
 import pandas as pd
 import requests
-import time
-from IPython.display import display, clear_output
+import plotly.graph_objs as go
 
 # Function to fetch cryptocurrency data from Binance API
 def fetch_crypto_data():
     url = "https://api.binance.com/api/v3/ticker/24hr"
     response = requests.get(url)
     data = response.json()
-    return data
+    return pd.DataFrame(data)
 
-# Function to display the data (modify for Binance API response)
-def display_data(data):
-    # Access data using appropriate keys from Binance API response
-    df = pd.DataFrame(data)
-    # Example: Assuming "symbol", "lastPrice", "priceChange" are keys
-    df = df[['symbol', 'lastPrice', 'priceChange']]
-    df.columns = ['Cryptocurrency', 'Last Price (USD)', 'Price Change (USD)']
-    display(df.sort_values(by='Last Price', ascending=False))  # Sort by last price
+# Fetch initial data
+df = fetch_crypto_data()
 
-# ... rest of the code remains the same (plot_price_trends, export_data, main loop)
+# Initialize the Dash app
+app = dash.Dash(__name__)
 
-# Main loop (modify coin_ids if needed)
-if __name__ == "__main__":
-    while True:
-        data = fetch_crypto_data()
-        clear_output(wait=True)
-        display_data(data)
-        time.sleep(60)  # Update every 60 seconds
+# Layout of the app
+app.layout = html.Div([
+    html.H1("Cryptocurrency Overview"),
+    dcc.Dropdown(
+        id='crypto-dropdown',
+        options=[{'label': symbol, 'value': symbol} for symbol in df['symbol']],
+        value='BTCUSDT',  # Default value
+        clearable=False,
+    ),
+    dcc.Graph(id='price-chart'),
+    html.Button("Download CSV", id='download-button'),
+    dcc.Download(id="download-dataframe-csv"),
+])
+
+# Callback to update the graph based on selected cryptocurrency
+@app.callback(
+    Output('price-chart', 'figure'),
+    Input('crypto-dropdown', 'value')
+)
+def update_graph(selected_crypto):
+    # Filter DataFrame for selected cryptocurrency
+    col_df = df[df['symbol'] == selected_crypto]
+    
+    # Create a line chart for price change over time (mock data for demonstration)
+    figure = go.Figure()
+    
+    # Use mock historical data for demonstration purposes (replace with actual historical data if available)
+    historical_prices = [float(col_df['weightedAvgPrice'].values[0])] * 10  # Mocking same price for simplicity
+    figure.add_trace(go.Scatter(
+        x=list(range(10)),  # Mock time series
+        y=historical_prices,
+        mode='lines+markers',
+        name=selected_crypto,
+        line=dict(shape='linear')
+    ))
+    
+    figure.update_layout(title=f'{selected_crypto} Price Over Time',
+                          xaxis_title='Time',
+                          yaxis_title='Price (USDT)')
+    
+    return figure
+
+# Callback to download CSV data
+@app.callback(
+    Output("download-dataframe-csv", "data"),
+    Input("download-button", "n_clicks"),
+)
+def download_csv(n_clicks):
+    if n_clicks:
+        return dcc.send_data_frame(df.to_csv, "cryptocurrency_data.csv", index=False)
+
+# Run the app
+if __name__ == '__main__':
+    app.run_server(debug=True)
