@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-import plotly.graph_objs as go
+# import plotly.graph_objs as go
 
 # Function to fetch cryptocurrency data from Binance API
 def fetch_crypto_data():
